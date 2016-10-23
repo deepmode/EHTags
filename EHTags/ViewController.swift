@@ -19,9 +19,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let words = ["hello", "Happy Day", "HoHoHo Word Word Word","cool","Chicken soup taste", "persistent storage", "solution to", "handle this", "aspect", "Chicken soup tsoup tastup tast","Chicken sooup tast","Chicken ast","Chickenp tastChist","Chict","Chickt"]
+        let words = ["hello", "Happy Day", "HoHoHo Word Word Word","cool","Chicken soup taste", "persistent storage", "solution to", "handle this", "aspect", "Chicken soup tsoup tastup tast","Chicken sooup tast","Chicken ast","Chickenp tastChist","Chict","Chickt", "Application. I applied", "through a recruiter. The process", "took 2 weeks", "Application.", "I applied", "through", "a", "recruiter.", "The process", "took 2 weeks"]
         //self.tagsView = EHTagsView()
         self.tagsView.setup(self.tagsView.bounds.width, words: words)
+        self.tagsView.delegate = self
         print("Estimate tagViewHeight DDD = \(self.tagsView.estimateTagsViewHeight(tagsView.bounds.width))")
         self.view.setNeedsLayout()
     }
@@ -36,7 +37,10 @@ class ViewController: UIViewController {
         self.tagsView?.setNeedsDisplay()
         print("Estimate tagViewHeight = \(self.tagsView.estimateTagsViewHeight(size.width))")
     }
-
-
 }
 
+extension ViewController: EHTagsViewDelegate {
+    func didPressTagButton(tagButton: UIButton) {
+        print("Button Press: \(tagButton.titleLabel?.text)")
+    }
+}

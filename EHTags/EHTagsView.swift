@@ -20,6 +20,10 @@ extension String {
     }
 }
 
+protocol EHTagsViewDelegate {
+    func didPressTagButton(tagButton: UIButton)
+}
+
 class EHTagsView: UIView {
     
     let topPadding:CGFloat = 10.0
@@ -29,14 +33,15 @@ class EHTagsView: UIView {
     let trailPadding:CGFloat = 10.0
     let bottomPadding:CGFloat = 10.0
     
-    let labelTextVPadding:CGFloat = 10.0 + 10.0
-    let labelTextHPadding:CGFloat = 10.0 + 10.0
+    let labelTextVPadding:CGFloat = 5.0 + 5.0
+    let labelTextHPadding:CGFloat = 5.0 + 5.0
     let tagViewBackgroundColor = UIColor.greenColor()
     let tagBackgroundColor = UIColor.groupTableViewBackgroundColor()
     
     //let selectFont = UIFont.systemFontOfSize(12.0)
     
     var labels = [UIButton]()
+    var delegate:EHTagsViewDelegate?
 
     func setup(containerWidth:CGFloat, words:[String]) {
     
@@ -75,9 +80,9 @@ class EHTagsView: UIView {
         }
     }
     
-    func buttonPress(sender:UIButton) {
-        
-        print("button: \(sender.titleLabel?.text)")
+    internal func buttonPress(sender:UIButton) {
+        //print("button: \(sender.titleLabel?.text)")
+        self.delegate?.didPressTagButton(sender)
     }
 
 
